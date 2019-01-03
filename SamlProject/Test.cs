@@ -97,12 +97,12 @@ namespace SamlProject
             }
         }
 
-        public void ReceiveSamlResponse(Saml2SsoBinding spBinding, HttpContextBase httpContext)
+        public XmlElement ReceiveSamlResponse(HttpContextBase httpContext)
         {
-            XmlElement responseElement; string relayState;
+            XmlElement responseElement;
+            string relayState;
             ServiceProvider.ReceiveSAMLResponseByHTTPPost(httpContext.Request, out responseElement, out relayState);
-            //var info = new ComponentSpaceSaml2Response(responseElement, relayState, spBinding,
-            //    _certificates.GetEncryptionCertificate(), httpContext);
+            return responseElement;
             //return info;
         }
 
