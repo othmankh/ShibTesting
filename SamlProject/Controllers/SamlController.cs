@@ -12,7 +12,8 @@ namespace SamlProject.Controllers
             var test = new Test();
             var res = test.ReceiveSamlResponse( Saml2SsoBinding.HttpRedirect, HttpContext);
             var response = test.GetResponse(HttpContext);
-            return response.InnerText + "\n -------- \n" + response.InnerXml + "\n -------- \n";
+            return response.InnerText + "\n ___________________________________________________________ \n" 
+            + response.InnerXml + "\n ___________________________________________________________ \n";
         }
 
         // GET: Saml/Details/5
