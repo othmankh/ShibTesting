@@ -1,5 +1,4 @@
 ﻿using System.Web;
-using System.Xml;
 
 namespace SamlProject
 {
@@ -8,6 +7,6 @@ namespace SamlProject
         void SendAuthnRequest(string idpLocation, Saml2SsoBinding idpBinding,
             string fromSpEntityId, string returnUrl, HttpContextBase httpContext);
 
-        XmlElement ReceiveSamlResponse( HttpContextBase httpContext);
+        ComponentSpaceSaml2Response ReceiveSamlResponse(Saml2SsoBinding spBinding, HttpContextBase httpContext);
     }
 }
