@@ -7,19 +7,19 @@ namespace SamlProject.Controllers
     public class SamlController : Controller
     {
         // GET: Saml
-        public XmlElement login()
+        public string login()
         {
             var test = new Test();
             var res = test.ReceiveSamlResponse(HttpContext);
-            return res;
+            return res.Value;
         }
 
         // GET: Saml/Details/5
-        public XmlElement logout(int id)
+        public string logout(int id)
         {
             var test = new Test();
             var res = test.ReceiveSamlResponse(HttpContext);
-            return res;
+            return res.Value;
         }
     }
 }
