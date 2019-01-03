@@ -10,10 +10,9 @@ namespace SamlProject.Controllers
         public string login()
         {
             var test = new Test();
-            var res = test.ReceiveSamlResponse( Saml2SsoBinding.HttpRedirect, HttpContext);
+            var res = test.ReceiveSamlResponse(Saml2SsoBinding.HttpRedirect, HttpContext);
             var response = test.GetResponse(HttpContext);
-            return response.InnerText + "\n ___________________________________________________________ \n" 
-            + response.InnerXml + "\n ___________________________________________________________ \n";
+            return response.InnerXml + "\n ___________________________________________________________ \n";
         }
 
         // GET: Saml/Details/5
