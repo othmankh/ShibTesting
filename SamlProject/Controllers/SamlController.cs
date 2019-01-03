@@ -11,7 +11,7 @@ namespace SamlProject.Controllers
         {
             var test = new Test();
             var res = test.ReceiveSamlResponse(HttpContext);
-            return res.Value;
+            return res.OuterXml;
         }
 
         // GET: Saml/Details/5
@@ -19,7 +19,7 @@ namespace SamlProject.Controllers
         {
             var test = new Test();
             var res = test.ReceiveSamlResponse(HttpContext);
-            return res.Value;
+            return res.OuterXml;
         }
     }
 }
