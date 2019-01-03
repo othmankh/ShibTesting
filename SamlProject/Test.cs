@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Web;
 using System.Xml;
@@ -108,6 +109,14 @@ namespace SamlProject
             var info = new ComponentSpaceSaml2Response(responseElement, relayState, spBinding,
                encryptionCertificate, httpContext);
             return info;
+        }
+
+        public XmlElement GetResponse(HttpContextBase httpContext)
+        {
+            XmlElement responseElement; string relayState;
+
+            ServiceProvider.ReceiveSAMLResponseByHTTPPost(httpContext.Request, out responseElement, out relayState);
+            return responseElement;
         }
 
     }
