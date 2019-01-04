@@ -7,6 +7,6 @@ namespace SamlProject
         void SendAuthnRequest(string idpLocation, Saml2SsoBinding idpBinding,
             string fromSpEntityId, string returnUrl, HttpContextBase httpContext);
 
-        void ReceiveSamlResponse(Saml2SsoBinding spBinding, HttpContextBase httpContext);
+        ComponentSpaceSaml2Response ReceiveSamlResponse(Saml2SsoBinding spBinding, HttpContextBase httpContext);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Web;
 using System.Xml;
@@ -110,13 +111,25 @@ namespace SamlProject
             }
         }
 
-        public void ReceiveSamlResponse(Saml2SsoBinding spBinding, HttpContextBase httpContext)
+        public ComponentSpaceSaml2Response ReceiveSamlResponse(Saml2SsoBinding spBinding, HttpContextBase httpContext)
         {
             XmlElement responseElement; string relayState;
+            var encryptionCertificate = new X509Certificate2();
+            //var encryptionCertificate = GetCertificate();
+            var privateKey = @"MIIDUDCCAjgCCQC+yzvBEnTI0DANBgkqhkiG9w0BAQsFADBqMQswCQYDVQQGEwJH QjERMA8GA1UECAwIU29tZXJzZXQxDTALBgNVBAcMBEJhdGgxHDAaBgNVBAoME0Jh dGggU3BhIFVuaXZlcnNpdHkxGzAZBgNVBAMMEmF1dGguYmF0aHNwYS5hYy51azAe Fw0xNzA2MTIxMjMyMDlaFw0zNzA2MDcxMjMyMDlaMGoxCzAJBgNVBAYTAkdCMREw DwYDVQQIDAhTb21lcnNldDENMAsGA1UEBwwEQmF0aDEcMBoGA1UECgwTQmF0aCBT cGEgVW5pdmVyc2l0eTEbMBkGA1UEAwwSYXV0aC5iYXRoc3BhLmFjLnVrMIIBIjAN BgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6ZwPWSXGxtfgSBlFSIE7XGwtKSgM AOFw0r/8XstAyBdthJmTAUg0pgJAuh2IPCf3/+T/mypDMfE9cGg53KEqk8aKyoDF KSbEjGDGDu3viBLVNjA7tu1qBsN/MGuG2bWO/RwqVH1XV52nvibw19tOOL6alxW4 7JGApo/4rU4uZJrkjQA/qqy1xnmep6vGmJn5r3c+eJzicZ2PUE+srInj2mh7M4Cd CXK/d1pCHlDeXpd2qldva6h1i6GShop1K4uIUG5qLw6tzVxO28RxU9hakF4jsIAJ ML1V5suV13F1x3BflosrH7vlmtBwgiuwGizLbp53HzHYyaePeo9JkIAVJwIDAQAB MA0GCSqGSIb3DQEBCwUAA4IBAQC0yXqEa0JFL7t4rREhJRylusn5kze8vDXsBq2T 84JjRR5v3Hf+N4iVc4k9UQi10SWsG91IPhD3gow5pI/36w2fLQlATj23YoBw1TpZ UoMNyhS/NZSRk+VJOBo+y6UpB1axk1ClvcanC4xSisgzHL70R3D/Z0ikfZ7df76r XcxVll30Ip+ywjWAvgpuEhXXgdXYD3r+lb8VRSGFAn0gd3nQMYbSXWBY4rWeHa9e aKUKWhZ11zY7fcPFsMnNQfZ43sHqnZovelOX7/CdD0CYfXvBJY5wadpowr906WPx UaPVPqo6jGwPYAhUMZjLzttfgPl3FZ61NHJNwdpaBYZ7BuLQ";
+            encryptionCertificate.Import(Encoding.ASCII.GetBytes(privateKey));
             ServiceProvider.ReceiveSAMLResponseByHTTPPost(httpContext.Request, out responseElement, out relayState);
-            //var info = new ComponentSpaceSaml2Response(responseElement, relayState, spBinding,
-            //    _certificates.GetEncryptionCertificate(), httpContext);
-            //return info;
+            var info = new ComponentSpaceSaml2Response(responseElement, relayState, spBinding,
+               encryptionCertificate, httpContext);
+            return info;
+        }
+
+        public XmlElement GetResponse(HttpContextBase httpContext)
+        {
+            XmlElement responseElement; string relayState;
+
+            ServiceProvider.ReceiveSAMLResponseByHTTPPost(httpContext.Request, out responseElement, out relayState);
+            return responseElement;
         }
 
     }

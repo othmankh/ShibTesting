@@ -271,7 +271,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="ComponentSpaceSaml2Response.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SamlController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -281,7 +283,9 @@
     <Compile Include="Saml2Response.cs" />
     <Compile Include="Saml2SsoBinding.cs" />
     <Compile Include="SamlAttributeFriendlyName.cs" />
+    <Compile Include="SamlAttributeFriendlyNameString.cs" />
     <Compile Include="SamlAttributeName.cs" />
+    <Compile Include="SamlAttributeNameString.cs" />
     <Compile Include="Test.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -326,6 +330,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Views\Saml\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
