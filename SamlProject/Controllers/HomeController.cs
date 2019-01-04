@@ -8,7 +8,7 @@ namespace SamlProject.Controllers
         {
             var test = new Test();
             var idpLocation = "https://auth.bathspa.ac.uk/idp/profile/SAML2/Redirect/SSO";
-            var entityId = "live.unitu.co.uk";
+            var entityId = "unitu.co.uk";
             test.SendAuthnRequest(idpLocation, Saml2SsoBinding.HttpRedirect, entityId, entityId, HttpContext);
             return View();
         }
